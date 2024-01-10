@@ -27,9 +27,9 @@ const LoginContainer = () => {
 
 
           dispatch(setSnapsList(value));
-        
-          navigate("/snaps")  
-          
+
+          navigate("/snaps")
+
 
 
       })
@@ -54,6 +54,10 @@ const LoginContainer = () => {
       .then(res => {
         document.getElementById('username').value = '';
         document.getElementById('password').value = '';
+        return res.json();
+      })
+      .then( (json) => {
+        window.alert(json);
       })
       .catch(() => {console.log('Error in signupHandler')});
   }
