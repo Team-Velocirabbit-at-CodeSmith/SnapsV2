@@ -31,6 +31,12 @@ const SnapsContainer = () => {
         // Query OpenAI API
         // Store ChatGPT summary in database for user
         let translated = (async () => {
+
+            // LOADING ELEMENT RENDER HERE
+              // CREATE ELEMENT AS SIBLING TO snaps-table container AND CHILD OF snaps-container
+              // GIVE ELEMENT ID OF LOADER
+
+
             const rawResponse = await fetch(
               "https://api.openai.com/v1/chat/completions",
               {
@@ -81,6 +87,11 @@ const SnapsContainer = () => {
             })
             .then(res => res.json())
             .then(res => {
+
+              // REMOVE LOADING ELEMENT
+
+
+
               document.getElementById('urlInput').value = '';
               document.getElementById('titleInput').value = '';
               console.log('dispatching setSnapsList ', res);

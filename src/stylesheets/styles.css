@@ -149,7 +149,29 @@ a:hover {
 }
 
 .snaps-table.elements.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
     width: 30%
+}
+
+.snaps-table.elements.title>a {
+    flex: 1;
+}
+
+.delete-button {
+    padding: 3px;
+}
+
+.delete-button:hover {
+    cursor: pointer;
+    background-color: #64b5fc2a;
+    border-radius: 50%;
+}
+
+.delete-button:active {
+    background-color: #64b5fc72
 }
 
 .snaps-table.elements.text {

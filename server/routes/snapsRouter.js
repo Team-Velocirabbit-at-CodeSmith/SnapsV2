@@ -10,5 +10,10 @@ router.post('/', snapsController.addSnap, (req,res) => {
   return res.status(200).json(res.locals.allSnaps);
 });
 
+router.delete('/', snapsController.deleteSnap, (req, res) => {
+  console.log(res.locals.deletedUser);
+  return res.status(200).json(res.locals.deletedUser);
+})
+
 
 module.exports = router;
