@@ -2,9 +2,11 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 3000;
+const puppeteer = require('puppeteer')
 
 const userRouter = require('./routes/userRouter');
 const snapsRouter = require('./routes/snapsRouter');
+const webscrapeRouter = require('./routes/webscrapeRouter');
 
 // Handle parsing of request body
 app.use(express.json());
@@ -16,6 +18,7 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 // Define route handlers
 app.use('/user', userRouter);
 app.use('/my-snaps', snapsRouter);
+app.use('/webScrape', webscrapeRouter);
 
 // Catch-all route handler
 app.use('/*', (req, res) => {

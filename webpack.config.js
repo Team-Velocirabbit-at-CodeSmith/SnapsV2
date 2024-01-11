@@ -17,7 +17,8 @@ module.exports = {
     liveReload: true,
     proxy: {
       '/user': 'http://localhost:3000',
-      '/my-snaps': 'http://localhost:3000'
+      '/my-snaps': 'http://localhost:3000',
+      '/webScrape': 'http://localhost:3000',
     },
   },
   module: {
@@ -53,4 +54,5 @@ module.exports = {
     }),
     new Dotenv(),
   ],
+
 };
