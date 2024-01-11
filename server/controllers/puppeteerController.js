@@ -23,8 +23,9 @@ puppeteerController.webscrape = async(req, res, next) => {
         await page.goto(req.body.url);
 
         // //get the node for title and extract the text
-        const titleNode = await page.$('title');
-        const title = await page.evaluate(el => el.innerText, titleNode);
+        //can use the title info instead of full article when using cheaper version of chatgbt (3.5-turbo)that has a character count limit
+        // const titleNode = await page.$('title');
+        // const title = await page.evaluate(el => el.innerText, titleNode);
 
     
 
@@ -32,13 +33,9 @@ puppeteerController.webscrape = async(req, res, next) => {
 
         const articleNode = await page.$('body');
         const article = await page.evaluate(el => el.innerText, articleNode);
-        // console.log(title)
-        // console.log(article)
 
-        res.locals.webscrape = title;
-        //get the whole page's HTML content
-        // const content = await page.content();
-        // console.log(content);
+
+        res.locals.webscrape = article;
 
         //finally, closes the puppeteer browser and all its pages
         await browser.close();

@@ -37,8 +37,6 @@ const SnapsContainer = () => {
           //moved variable declaration for identifying userURLInput earlier
           const userUrlInput = document.getElementById('urlInput').value;
 
-          console.log("userUrlInput: ", userUrlInput);
-
           const puppeteerResponse = await fetch('/webScrape', {
             method: 'POST',
             headers: {
@@ -48,9 +46,8 @@ const SnapsContainer = () => {
           })
           .then(res => res.json())
           .then(res=> JSON.stringify(res))
-          // .then(const newPuppet = res)
           // .then(res => console.log("puppeteer response in frontend: ", res))
-          // .then(res => res.stringify());
+         
           console.log("puppeteer response in frontend outside function: ", puppeteerResponse);
 
             const rawResponse = await fetch(
@@ -63,7 +60,7 @@ const SnapsContainer = () => {
                   Authorization: `Bearer ` + process.env.REACT_APP_OPENAI_KEY,
                 },
                 body: JSON.stringify({
-                  model: "gpt-3.5-turbo",
+                  model: "gpt-4",
                   messages: [{
                         role: "user",
                         content: `Summarize this article into less than 200 words, respond in concise bullet points: ${puppeteerResponse}`
