@@ -31,6 +31,32 @@ snapsController.addSnap = async(req, res, next) => {
   }
 }
 
+snapsController.deleteSnap = async (req, res, next) => {
 
+  try {
+    const queryObj = {
+      text: 'DELETE FROM Snaps WHERE Snaps.snap_id = $1',
+      values: [req.body.snap_id],
+    };
+
+    const deleted = await db.query(queryObj);
+
+    console.log(deleted, 'deleted');
+
+    res.locals.deletedUser = deleted.rows;
+
+    return next();
+  } catch {
+    const err = {
+      log: 'Express error handler caught error in snapsController.deleteSnap',
+      status: 500,
+      message: { err: 'A massive error occured' },
+    }
+    return next(err);
+  }
+
+
+
+}
 
 module.exports = snapsController;
