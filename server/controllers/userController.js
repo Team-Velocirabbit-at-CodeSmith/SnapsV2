@@ -2,6 +2,7 @@ const db = require("../models/snapsModel");
 
 const userController = {};
 
+ //this function removes any excess white space from username 
 const sanitize = (unsanitizedString) => {
   return unsanitizedString.trim();
 };
@@ -14,11 +15,7 @@ userController.login = async (req, res, next) => {
     req.params.password
   );
   try {
-    //first sanitize the inputted string
-    // userController.sanitize = (unsanitizedString) => {
-    //   return unsanitizedString.trim();
-    // };
-
+    //this function removes any excess white space from inputted username 
     sanitize(req.params.username);
 
     const queryObj = {
