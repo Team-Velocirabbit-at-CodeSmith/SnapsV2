@@ -57,7 +57,11 @@ const LoginContainer = () => {
         return res.json();
       })
       .then( (json) => {
-        window.alert(json);
+        if (json.length > 0) {
+          window.alert(json);
+        } else {
+          window.alert('User created!');
+        }
       })
       .catch(() => {console.log('Error in signupHandler')});
   }
