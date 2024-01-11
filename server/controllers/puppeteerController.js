@@ -22,7 +22,7 @@ puppeteerController.webscrape = async(req, res, next) => {
         //go to target website
         await page.goto(req.body.url);
 
-        //get the node for title and extract the text
+        // //get the node for title and extract the text
         const titleNode = await page.$('title');
         const title = await page.evaluate(el => el.innerText, titleNode);
 
@@ -35,7 +35,7 @@ puppeteerController.webscrape = async(req, res, next) => {
         // console.log(title)
         // console.log(article)
 
-        res.locals.webscrape = article;
+        res.locals.webscrape = title;
         //get the whole page's HTML content
         // const content = await page.content();
         // console.log(content);

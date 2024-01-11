@@ -46,9 +46,13 @@ const SnapsContainer = () => {
             },
             body: JSON.stringify({url: userUrlInput})
           })
-          // .then(res => res.json())
+          .then(res => res.json())
+          .then(res=> JSON.stringify(res))
+          // .then(const newPuppet = res)
+          // .then(res => console.log("puppeteer response in frontend: ", res))
           // .then(res => res.stringify());
-            
+          console.log("puppeteer response in frontend outside function: ", puppeteerResponse);
+
             const rawResponse = await fetch(
               "https://api.openai.com/v1/chat/completions",
               {
@@ -60,18 +64,17 @@ const SnapsContainer = () => {
                 },
                 body: JSON.stringify({
                   model: "gpt-3.5-turbo",
-                  messages: [
-                    {
-                      role: "user",
-                      content: puppeteerResponse,
-                    },
-                  ],
+                  messages: [{
+                        role: "user",
+                        content: `Summarize this article into less than 200 words, respond in concise bullet points: ${puppeteerResponse}`
+                      }],
                   temperature: 0.7,
                 }),
               }
             );
             const content = await rawResponse.json();
             const summary = content.choices[0].message.content.toString();
+            console.log("summary: ", summary);
             
             const userTitleInput = document.getElementById('titleInput').value;
               console.log("snapsList before post call ", snapsList)
