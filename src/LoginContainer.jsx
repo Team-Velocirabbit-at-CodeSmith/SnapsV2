@@ -27,9 +27,9 @@ const LoginContainer = () => {
 
 
           dispatch(setSnapsList(value));
-        
-          navigate("/snaps")  
-          
+
+          navigate("/snaps")
+
 
 
       })
@@ -54,6 +54,14 @@ const LoginContainer = () => {
       .then(res => {
         document.getElementById('username').value = '';
         document.getElementById('password').value = '';
+        return res.json();
+      })
+      .then( (json) => {
+        if (json.length > 0) {
+          window.alert(json);
+        } else {
+          window.alert('User created!');
+        }
       })
       .catch(() => {console.log('Error in signupHandler')});
   }
