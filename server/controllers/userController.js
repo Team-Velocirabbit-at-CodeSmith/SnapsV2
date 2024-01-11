@@ -39,12 +39,28 @@ userController.login = async (req, res, next) => {
 
 userController.signup = async (req, res, next) => {
   try {
+
+    const queryToCheck = {
+      text: 'SELECT EXISTS(SELECT * FROM Users WHERE Users.username = $1)',
+      values: [req.body.username],
+    };
+
+    const userInDB = await db.query(queryToCheck);
+    console.log(userInDB.rows[0].exists, 'userInDB.rows[0].username');
+
+    if (userInDB.rows[0].exists) {
+      res.locals.newUser = null;
+      res.locals.message = `Please make a unique username. ${req.body.username} already exists.`;
+      return next();
+    }
+
     const queryObj = {
       text: "INSERT INTO Users (username, password) VALUES ($1, $2)",
       values: [req.body.username, req.body.password],
     };
+
     const newUser = await db.query(queryObj);
-    console.log(newUser, "newuser");
+    // console.log(newUser, 'newuser');
     res.locals.newUser = newUser.rows;
     // console.log('this is user', user);
     return next();
