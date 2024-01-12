@@ -24,18 +24,19 @@ puppeteerController.webscrape = async(req, res, next) => {
 
         // //get the node for title and extract the text
         //can use the title info instead of full article when using cheaper version of chatgbt (3.5-turbo)that has a character count limit
-        // const titleNode = await page.$('title');
-        // const title = await page.evaluate(el => el.innerText, titleNode);
+        const titleNode = await page.$('title');
+        const title = await page.evaluate(el => el.innerText, titleNode);
 
     
 
         //if article tag can be found, use that, else use body tag
-
+        //pass article into res.locals.webscrape if chat gbt is upgraded to premium and then switch the version of the chat gbt request to 4 which can take an input of a much higher character count. We can currently only afford sraping for the title of an article, not the whole body. 
         const articleNode = await page.$('body');
+       
         const article = await page.evaluate(el => el.innerText, articleNode);
 
 
-        res.locals.webscrape = article;
+        res.locals.webscrape = title;
 
         //finally, closes the puppeteer browser and all its pages
         await browser.close();
